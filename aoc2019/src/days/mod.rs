@@ -14,7 +14,6 @@ pub fn day_1() {
 	let mut fuel_required_for_modules_only = 0; // Part 1
 	let mut total_fuel_required = 0; // Part 2
 	
-	// NOTE(fkp): Part 1
 	for line in reader.lines() {
 		let line = line.unwrap();
 		let module_mass: i32 = line.parse().unwrap();
@@ -49,7 +48,31 @@ pub fn day_2() {
 	
 	let mut intcode_computer = Intcode::new();
 	intcode_computer.read_program_from_file(FILEPATH);
+
+	// NOTE(fkp): Part 1
 	intcode_computer.run_program();
 	
-	println!("Day 2 (Part 1): First Index of Resulting Program = {}", intcode_computer.numbers[0]);
+	// NOTE(fkp): Part 2
+	const REQUIRED_OUTPUT: i32 = 19690720;
+	let mut output_value = 0;
+	
+	'outer: for noun in 0..100 {
+		for verb in 0..100 {
+			intcode_computer.program = intcode_computer.original_program.to_vec();
+			
+			// Sets the required input values
+			intcode_computer.program[1] = noun;
+			intcode_computer.program[2] = verb;
+
+			intcode_computer.run_program();
+
+			if intcode_computer.program[0] == REQUIRED_OUTPUT {
+				output_value = 100 * noun + verb;
+				break 'outer;
+			}
+		}
+	}
+	
+	println!("Day 2 (Part 1): First Index of Resulting Program = {}", intcode_computer.program[0]);
+	println!("      (Part 2): 100 * noun + verb = {}", output_value);
 }
