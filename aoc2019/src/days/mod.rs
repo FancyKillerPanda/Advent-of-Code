@@ -3,6 +3,8 @@ use std::io::{ BufReader, BufRead };
 
 mod intcode;
 use intcode::Intcode;
+mod wire;
+use wire::Wire;
 
 // NOTE(fkp): Day 1 - The Tyranny of the Rocket Equation
 pub fn day_1() {
@@ -75,4 +77,19 @@ pub fn day_2() {
 	
 	println!("Day 2 (Part 1): First Index of Resulting Program = {}", intcode_computer.program[0]);
 	println!("      (Part 2): 100 * noun + verb = {}", output_value);
+}
+
+// NOTE(fkp): Day 3 - Crossed Wires
+pub fn day_3() {
+	const FILEPATH: &str = "res/day_3.txt";
+
+	let (row_count, col_count, starting_point) = Wire::get_required_grid_size(FILEPATH);
+
+	let mut first_wire = Wire::new(row_count, col_count, starting_point);
+	let mut second_wire = Wire::new(row_count, col_count, starting_point);
+
+	first_wire.trace_path(FILEPATH, starting_point, true);
+	second_wire.trace_path(FILEPATH, starting_point, false);
+
+	println!("Day 3 (Part 1): Manhattan Distance to Nearest Intersection = {}", first_wire.compare_intersections(&second_wire));
 }
