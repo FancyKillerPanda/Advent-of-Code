@@ -3,8 +3,8 @@ use std::io::{ BufReader, BufRead };
 
 mod intcode;
 use intcode::Intcode;
-mod wire;
-use wire::Wire;
+mod grid;
+use grid::Grid;
 
 // NOTE(fkp): Day 1 - The Tyranny of the Rocket Equation
 pub fn day_1() {
@@ -83,13 +83,8 @@ pub fn day_2() {
 pub fn day_3() {
 	const FILEPATH: &str = "res/day_3.txt";
 
-	let (row_count, col_count, starting_point) = Wire::get_required_grid_size(FILEPATH);
+	let mut grid = Grid::new(FILEPATH);
+	grid.trace_wire_paths();
 
-	let mut first_wire = Wire::new(row_count, col_count, starting_point);
-	let mut second_wire = Wire::new(row_count, col_count, starting_point);
-
-	first_wire.trace_path(FILEPATH, starting_point, true);
-	second_wire.trace_path(FILEPATH, starting_point, false);
-
-	println!("Day 3 (Part 1): Manhattan Distance to Nearest Intersection = {}", first_wire.compare_intersections(&second_wire));
+	println!("Day 3 (Part 1): Manhattan Distance to Nearest Intersection = {}", grid.get_closest_intersection_manhattan());
 }
