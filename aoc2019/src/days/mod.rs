@@ -86,5 +86,6 @@ pub fn day_3() {
 	let mut grid = Grid::new(FILEPATH);
 	grid.trace_wire_paths();
 
-	println!("Day 3 (Part 1): Manhattan Distance to Nearest Intersection = {}", grid.get_closest_intersection_manhattan());
+	println!("Day 3 (Part 1): Manhattan Distance to Nearest Intersection = {}", grid.get_closest_intersection_distance_manhattan());
+	println!("      (Part 2): Closest Intersection (Number of Steps) = {}", grid.get_closest_intersection_distance_steps());
 }
