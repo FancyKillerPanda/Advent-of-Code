@@ -96,18 +96,24 @@ pub fn day_4() {
 	const MIN_NUMBER: i32 = 264793;
 	const MAX_NUMBER: i32 = 803935;
 
-	let mut number_of_valid_passwords = 0;
+	let mut part_1_number_of_valid_passwords = 0;
+	let mut part_2_number_of_valid_passwords = 0;
 	
 	for number in MIN_NUMBER..=MAX_NUMBER {
-		if is_valid_password(number) {
-			number_of_valid_passwords += 1;
+		if part_1_is_valid_password(number) {
+			part_1_number_of_valid_passwords += 1;
+		}
+
+		if part_2_is_valid_password(number) {
+			part_2_number_of_valid_passwords += 1;
 		}
 	}
 
-	println!("Day 4 (Part 1): Number of Valid Passwords = {}", number_of_valid_passwords);
+	println!("Day 4 (Part 1): Number of Valid Passwords = {}", part_1_number_of_valid_passwords);
+	println!("      (Part 2): Number of Valid Passwords = {}", part_2_number_of_valid_passwords);
 }
 
-fn is_valid_password(number: i32) -> bool {
+fn part_1_is_valid_password(number: i32) -> bool {
 	let number_as_string = number.to_string();
 	let mut has_adjacent_same_digits = false;
 	
@@ -118,6 +124,37 @@ fn is_valid_password(number: i32) -> bool {
 		
 		if number_as_string.as_bytes()[i] == number_as_string.as_bytes()[i - 1] {
 			has_adjacent_same_digits = true;
+		}
+	}
+
+	return has_adjacent_same_digits;	
+}
+
+fn part_2_is_valid_password(number: i32) -> bool {
+	let number_as_string = number.to_string();
+	let number_as_bytes = number_as_string.as_bytes();
+	let mut has_adjacent_same_digits = false;
+	
+	for i in 1..number_as_bytes.len() {
+		if number_as_bytes[i] < number_as_bytes[i - 1] {
+			return false;
+		}
+		
+		if number_as_bytes[i] == number_as_bytes[i - 1] {
+			let mut same_digits_allowed = true;
+			
+			// Three in a row is not allowed
+			if i < number_as_bytes.len() - 1 && number_as_bytes[i + 1] == number_as_bytes[i] {
+				same_digits_allowed = false;
+			}
+
+			if i > 1 && number_as_bytes[i - 2] == number_as_bytes[i] {
+				same_digits_allowed = false;
+			}
+
+			if same_digits_allowed {
+				has_adjacent_same_digits = true;
+			}
 		}
 	}
 
