@@ -110,10 +110,10 @@ impl Grid {
 			for instruction in instructions {
 				let direction = instruction.chars().next().unwrap();
 				let distance: i32 = instruction.char_indices()
-											.next()
-											.and_then(|(i, _)| instruction.get(i + 1..))
-											.unwrap()
-											.parse().unwrap();
+											   .next()
+											   .and_then(|(i, _)| instruction.get(i + 1..))
+											   .unwrap()
+											   .parse().unwrap();
 
 				match direction {
 					'U' => {
