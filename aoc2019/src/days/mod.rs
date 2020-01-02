@@ -89,3 +89,37 @@ pub fn day_3() {
 	println!("Day 3 (Part 1): Manhattan Distance to Nearest Intersection = {}", grid.get_closest_intersection_distance_manhattan());
 	println!("      (Part 2): Closest Intersection (Number of Steps) = {}", grid.get_closest_intersection_distance_steps());
 }
+
+// NOTE(fkp): Day 4 - Secure Container
+pub fn day_4() {
+	// From input data
+	const MIN_NUMBER: i32 = 264793;
+	const MAX_NUMBER: i32 = 803935;
+
+	let mut number_of_valid_passwords = 0;
+	
+	for number in MIN_NUMBER..=MAX_NUMBER {
+		if is_valid_password(number) {
+			number_of_valid_passwords += 1;
+		}
+	}
+
+	println!("Day 4 (Part 1): Number of Valid Passwords = {}", number_of_valid_passwords);
+}
+
+fn is_valid_password(number: i32) -> bool {
+	let number_as_string = number.to_string();
+	let mut has_adjacent_same_digits = false;
+	
+	for i in 1..number_as_string.len() {
+		if number_as_string.as_bytes()[i] < number_as_string.as_bytes()[i - 1] {
+			return false;
+		}
+		
+		if number_as_string.as_bytes()[i] == number_as_string.as_bytes()[i - 1] {
+			has_adjacent_same_digits = true;
+		}
+	}
+
+	return has_adjacent_same_digits;	
+}

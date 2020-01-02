@@ -3,7 +3,7 @@ use std::env;
 mod days;
 use days::*;
 
-const DAYS_ARRAY: [fn(); 3] = [day_1, day_2, day_3];
+const DAYS_ARRAY: [fn(); 4] = [day_1, day_2, day_3, day_4];
 
 fn main() {
 	let mut args: Vec<String> = env::args().collect();
