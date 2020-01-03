@@ -92,6 +92,60 @@ impl Intcode {
 
 					index += 2;
 				}
+				5 | 6 => {
+					let value: i32;
+
+					if parameters[0] == 0 {
+						let value_index = self.program[index + 1] as usize;
+						value = self.program[value_index];
+					} else {
+						value = self.program[index + 1];
+					}
+
+					if (instruction_type == 5 && value != 0) || (instruction_type == 6 && value == 0) {
+						// Should jump
+						let value: usize;
+						
+						if parameters[1] == 0 {
+							let value_index = self.program[index + 2] as usize;
+							value = self.program[value_index] as usize;
+						} else {
+							value = self.program[index + 2] as usize;
+						}
+
+						index = value;
+					} else {
+						index += 3;
+					}
+				}
+				7 | 8 => {
+					let first_value: i32;
+					let second_value: i32;
+
+					if parameters[0] == 0 {
+						let value_index = self.program[index + 1] as usize;
+						first_value = self.program[value_index];
+					} else {
+						first_value = self.program[index + 1];
+					}
+
+					if parameters[1] == 0 {
+						let value_index = self.program[index + 2] as usize;
+						second_value = self.program[value_index];
+					} else {
+						second_value = self.program[index + 2];
+					}
+
+					let storage_location_index = self.program[index + 3] as usize;
+
+					if (instruction_type == 7 && first_value < second_value) || (instruction_type == 8 && first_value == second_value) {
+						self.program[storage_location_index] = 1;
+					} else {
+						self.program[storage_location_index] = 0;
+					}
+
+					index += 4;
+				}
 				99 | _ => {
 					break;
 				}
@@ -105,9 +159,11 @@ impl Intcode {
 		match instruction_type {
 			1 | 2 => number_of_parameters_left = 3,
 			3 | 4 => number_of_parameters_left = 1,
+			5 | 6 => number_of_parameters_left = 2,
+			7 | 8 => number_of_parameters_left = 3,
 			99 => number_of_parameters_left = 0,
 			_ => {
-				panic!("Incorrect program, unknown instruction.");
+				panic!("Incorrect program, unknown instruction {}.", instruction_type);
 			}
 		}
 

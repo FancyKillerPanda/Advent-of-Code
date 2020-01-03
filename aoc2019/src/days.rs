@@ -174,6 +174,14 @@ pub fn day_5() {
 
 	intcode_computer.input_value = 1;
 	intcode_computer.run_program();
+	let part_1_output_value = intcode_computer.output_value;
 	
-	println!("Day 5 (Part 1): Output Diagnostic Code = {}", intcode_computer.output_value);
+	intcode_computer.program = intcode_computer.original_program.to_vec();
+	intcode_computer.input_value = 5;
+	intcode_computer.run_program();
+	let part_2_output_value = intcode_computer.output_value;
+
+	
+	println!("Day 5 (Part 1): Output Diagnostic Code = {}", part_1_output_value);
+	println!("      (Part 2): Output Diagnostic Code = {}", part_2_output_value);
 }
