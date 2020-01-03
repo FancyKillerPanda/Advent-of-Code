@@ -52,7 +52,11 @@ pub fn day_2() {
 	intcode_computer.read_program_from_file(FILEPATH);
 
 	// NOTE(fkp): Part 1
+	intcode_computer.program[1] = 12;
+	intcode_computer.program[2] = 2;
+
 	intcode_computer.run_program();
+	let part_1_result = intcode_computer.program[0];
 	
 	// NOTE(fkp): Part 2
 	const REQUIRED_OUTPUT: i32 = 19690720;
@@ -75,7 +79,7 @@ pub fn day_2() {
 		}
 	}
 	
-	println!("Day 2 (Part 1): First Index of Resulting Program = {}", intcode_computer.program[0]);
+	println!("Day 2 (Part 1): First Index of Resulting Program = {}", part_1_result);
 	println!("      (Part 2): 100 * noun + verb = {}", output_value);
 }
 
