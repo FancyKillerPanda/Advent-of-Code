@@ -3,7 +3,7 @@ use std::env;
 mod days;
 use days::*;
 
-const DAYS_ARRAY: [fn(); 4] = [day_1, day_2, day_3, day_4];
+const DAYS_ARRAY: [fn(); 5] = [day_1, day_2, day_3, day_4, day_5];
 
 fn main() {
 	let mut args: Vec<String> = env::args().collect();
@@ -29,7 +29,7 @@ fn main() {
 				let index = index - 1;
 
 				if index >= DAYS_ARRAY.len() {
-					println!("Error: argument out of range (day {} not yet implemented)", index);
+					println!("Error: argument out of range (day {} not yet implemented)", index + 1);
 					return;
 				}
 

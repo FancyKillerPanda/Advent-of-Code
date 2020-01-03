@@ -160,3 +160,16 @@ fn part_2_is_valid_password(number: i32) -> bool {
 
 	return has_adjacent_same_digits;	
 }
+
+// NOTE(fkp): Day 5 - Sunny With a Chance of Asteroids
+pub fn day_5() {
+	const FILEPATH: &str = "res/day_5.txt";
+	
+	let mut intcode_computer = Intcode::new();
+	intcode_computer.read_program_from_file(FILEPATH);
+
+	intcode_computer.input_value = 1;
+	intcode_computer.run_program();
+	
+	println!("Day 5 (Part 1): Output Diagnostic Code = {}", intcode_computer.output_value);
+}
