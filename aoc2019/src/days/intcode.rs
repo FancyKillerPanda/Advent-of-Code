@@ -93,25 +93,21 @@ impl Intcode {
 					index += 2;
 				}
 				5 | 6 => {
-					let value: i32;
-
-					if parameters[0] == 0 {
+					let value = if parameters[0] == 0 {
 						let value_index = self.program[index + 1] as usize;
-						value = self.program[value_index];
+						self.program[value_index]
 					} else {
-						value = self.program[index + 1];
-					}
+						self.program[index + 1]
+					};
 
 					if (instruction_type == 5 && value != 0) || (instruction_type == 6 && value == 0) {
 						// Should jump
-						let value: usize;
-						
-						if parameters[1] == 0 {
+						let value: usize = if parameters[1] == 0 {
 							let value_index = self.program[index + 2] as usize;
-							value = self.program[value_index] as usize;
+							self.program[value_index] as usize
 						} else {
-							value = self.program[index + 2] as usize;
-						}
+							self.program[index + 2] as usize
+						};
 
 						index = value;
 					} else {

@@ -95,11 +95,11 @@ impl Grid {
 		let mut lines_iter = reader.lines();
 
 		for wire_index in 0..2 {
-			let mut wire_type = GridLocationState::First;
-			
-			if wire_index == 1 {
-				wire_type = GridLocationState::Second;
-			}
+			let wire_type = if wire_index == 0 {
+				GridLocationState::First
+			} else {
+				GridLocationState::Second
+			};
 
 			let line = lines_iter.next().unwrap().unwrap();
 			let instructions: Vec<&str> = line.split(',').collect();

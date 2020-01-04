@@ -19,7 +19,7 @@ fn main() {
 		let mut indices_to_run = vec![];
 
 		for arg in args {
-			if arg.chars().next().unwrap() == '-' {
+			if arg.starts_with('-') {
 				let index: usize = arg.char_indices()
 									  .next()
 									  .and_then(|(i, _)| arg.get(i + 1..))

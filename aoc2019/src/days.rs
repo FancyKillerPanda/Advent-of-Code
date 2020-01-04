@@ -59,7 +59,7 @@ pub fn day_2() {
 	let part_1_result = intcode_computer.program[0];
 	
 	// NOTE(fkp): Part 2
-	const REQUIRED_OUTPUT: i32 = 19690720;
+	const REQUIRED_OUTPUT: i32 = 19_690_720;
 	let mut output_value = 0;
 	
 	'outer: for noun in 0..100 {
@@ -97,8 +97,8 @@ pub fn day_3() {
 // NOTE(fkp): Day 4 - Secure Container
 pub fn day_4() {
 	// From input data
-	const MIN_NUMBER: i32 = 264793;
-	const MAX_NUMBER: i32 = 803935;
+	const MIN_NUMBER: i32 = 264_793;
+	const MAX_NUMBER: i32 = 803_935;
 
 	let mut part_1_number_of_valid_passwords = 0;
 	let mut part_2_number_of_valid_passwords = 0;
@@ -131,7 +131,7 @@ fn part_1_is_valid_password(number: i32) -> bool {
 		}
 	}
 
-	return has_adjacent_same_digits;	
+	has_adjacent_same_digits
 }
 
 fn part_2_is_valid_password(number: i32) -> bool {
@@ -162,7 +162,7 @@ fn part_2_is_valid_password(number: i32) -> bool {
 		}
 	}
 
-	return has_adjacent_same_digits;	
+	has_adjacent_same_digits
 }
 
 // NOTE(fkp): Day 5 - Sunny With a Chance of Asteroids
@@ -172,10 +172,12 @@ pub fn day_5() {
 	let mut intcode_computer = Intcode::new();
 	intcode_computer.read_program_from_file(FILEPATH);
 
+	// NOTE(fkp): Part 1
 	intcode_computer.input_value = 1;
 	intcode_computer.run_program();
 	let part_1_output_value = intcode_computer.output_value;
 	
+	// NOTE(fkp): Part 2
 	intcode_computer.program = intcode_computer.original_program.to_vec();
 	intcode_computer.input_value = 5;
 	intcode_computer.run_program();
