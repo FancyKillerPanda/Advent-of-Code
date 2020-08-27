@@ -187,3 +187,44 @@ pub fn day_5() {
 	println!("Day 5 (Part 1): Output Diagnostic Code = {}", part_1_output_value);
 	println!("      (Part 2): Output Diagnostic Code = {}", part_2_output_value);
 }
+
+// NOTE(fkp): Day 6 - Universal Orbit Map
+pub fn day_6() {
+	const FILEPATH: &str = "res/day_6.txt";
+
+	let orbital_pairs: Vec<(String, String)> = read_file_into_orbital_pairs(FILEPATH);
+	let number_of_orbits = recursive_count_orbits(orbital_pairs[0].1.as_str(),	&orbital_pairs);
+
+	println!("Day 6 (Part 1): Number of Orbits = {}", number_of_orbits);
+}
+
+// Returns Vec<(orbitee, orbiter)>
+fn read_file_into_orbital_pairs(filepath: &str) -> Vec<(String, String)> {
+	let file = File::open(filepath).unwrap();
+	let reader = BufReader::new(file);
+	let mut result: Vec<(String, String)> = vec![];
+	
+	for line in reader.lines() {
+		let line = line.unwrap();
+		let values: Vec<&str> = line.trim().split(',').collect();
+
+		result.push((values[0].to_string(), values[1].to_string()));
+	}
+
+	result
+}
+
+// Returns number of orbits
+fn recursive_count_orbits(target: &str, orbital_pairs: &Vec<(String, String)>, orbits_already_added: &mut Vec<(&String, i32)>) -> i32 {
+	if target == "COM" {
+		return 1;
+	}
+
+	for orbit in orbital_pairs {
+		if orbit.1 == target {
+			return 1 + recursive_count_orbits(&orbit.0, orbital_pairs);
+		}
+	}
+		
+	panic!("Targer not in orbit.");
+}
