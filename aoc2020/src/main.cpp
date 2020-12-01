@@ -3,8 +3,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <vector>
+#include <string>
 
-const std::vector<void(*)()> days;
+#include "day_one.cpp"
+
+const std::vector<std::string(*)()> days = { day_one };
 
 int main(int argc, char* argv[])
 {
@@ -24,9 +27,7 @@ int main(int argc, char* argv[])
 			}
 			else
 			{
-				printf("Running day %d:\n", dayNumber);
-				days[dayNumber - 1]();
-				printf("\n");
+				printf("Running day %d:\nResult: %s\n\n", dayNumber, days[dayNumber - 1]().c_str());
 			}
 		}
 	}
@@ -38,9 +39,7 @@ int main(int argc, char* argv[])
 		}
 		else
 		{
-			printf("Running latest day (%d):\n", (int) days.size());
-			days.back()();
-			printf("\n");
+			printf("Running latest day (%d):\nResult: %s\n\n", (int) days.size(), days.back()().c_str());
 		}
 	}
 }

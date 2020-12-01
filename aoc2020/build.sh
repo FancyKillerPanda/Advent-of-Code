@@ -34,7 +34,7 @@ clang++ $compileFlags $linkFlags $files || failed_build
 print $GREEN "Build succeeded!"
 print $BLUE "\nRunning..."
 
-./aoc2020 "$@"
-echo
-
 popd > /dev/null
+
+bin/aoc2020 "$@"
+echo
