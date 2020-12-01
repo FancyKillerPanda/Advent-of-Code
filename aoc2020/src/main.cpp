@@ -7,7 +7,7 @@
 
 #include "day_one.cpp"
 
-const std::vector<std::string(*)()> days = { day_one };
+const std::vector<std::string(*)()> days { day_one_part_one, day_one_part_two };
 
 int main(int argc, char* argv[])
 {
@@ -21,13 +21,16 @@ int main(int argc, char* argv[])
 			{
 				printf("Error: Could not run day '%s'.\n", argv[i]);
 			}
-			else if (dayNumber > (int) days.size())
+			else if (dayNumber > (int) days.size() / 2)
 			{
 				printf("Error: Day %d has not yet been completed.\n", dayNumber);
 			}
 			else
 			{
-				printf("Running day %d:\nResult: %s\n\n", dayNumber, days[dayNumber - 1]().c_str());
+				printf("Running day %d:\nResult (part one): %s\nResult (part two): %s\n\n",
+					   dayNumber,
+					   days[(dayNumber - 1) / 2]().c_str(),
+					   days[(dayNumber - 1) / 2 + 1]().c_str());
 			}
 		}
 	}
@@ -39,7 +42,10 @@ int main(int argc, char* argv[])
 		}
 		else
 		{
-			printf("Running latest day (%d):\nResult: %s\n\n", (int) days.size(), days.back()().c_str());
+			printf("Running latest day (day %d):\nResult (part one): %s\nResult (part two): %s\n",
+				   (int) days.size() / 2,
+				   days[days.size() - 2]().c_str(),
+				   days[days.size() - 1]().c_str());
 		}
 	}
 }
