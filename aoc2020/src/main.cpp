@@ -2,6 +2,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include <vector>
 #include <string>
 
@@ -17,24 +18,37 @@ int main(int argc, char* argv[])
 {
 	if (argc > 1)
 	{
-		for (int i = 1; i < argc; i++)
+		if (strcmp(argv[1], "--all") == 0)
 		{
-			int dayNumber = atoi(argv[i]);
+			for (int i = 0; i < (int) days.size(); i += 2)
+			{
+					printf("Running day %d:\nResult (part one): %s\nResult (part two): %s\n\n",
+						   i / 2,
+						   days[i]().c_str(),
+						   days[i + 1]().c_str());
+			}
+		}
+		else
+		{
+			for (int i = 1; i < argc; i++)
+			{
+				int dayNumber = atoi(argv[i]);
 
-			if (!dayNumber)
-			{
-				printf("Error: Could not run day '%s'.\n", argv[i]);
-			}
-			else if (dayNumber > (int) days.size() / 2)
-			{
-				printf("Error: Day %d has not yet been completed.\n", dayNumber);
-			}
-			else
-			{
-				printf("Running day %d:\nResult (part one): %s\nResult (part two): %s\n\n",
-					   dayNumber,
-					   days[(dayNumber - 1) / 2]().c_str(),
-					   days[(dayNumber - 1) / 2 + 1]().c_str());
+				if (!dayNumber)
+				{
+					printf("Error: Could not run day '%s'.\n", argv[i]);
+				}
+				else if (dayNumber > (int) days.size() / 2)
+				{
+					printf("Error: Day %d has not yet been completed.\n", dayNumber);
+				}
+				else
+				{
+					printf("Running day %d:\nResult (part one): %s\nResult (part two): %s\n\n",
+						   dayNumber,
+						   days[(dayNumber - 1) / 2]().c_str(),
+						   days[(dayNumber - 1) / 2 + 1]().c_str());
+				}
 			}
 		}
 	}
