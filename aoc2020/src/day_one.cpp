@@ -6,7 +6,7 @@
 
 std::string day_one_part_one()
 {
-	std::vector<int> lines = read_file_lines("res/day_one.txt");
+	std::vector<int> lines = read_file_lines_int("res/day_one.txt");
 
 	for (int i = 0; i < (int) lines.size(); i++)
 	{
@@ -24,7 +24,7 @@ std::string day_one_part_one()
 
 std::string day_one_part_two()
 {
-	std::vector<int> lines = read_file_lines("res/day_one.txt");
+	std::vector<int> lines = read_file_lines_int("res/day_one.txt");
 
 	for (int i = 0; i < (int) lines.size(); i++)
 	{

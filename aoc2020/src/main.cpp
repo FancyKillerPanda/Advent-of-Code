@@ -6,8 +6,12 @@
 #include <string>
 
 #include "day_one.cpp"
+#include "day_two.cpp"
 
-const std::vector<std::string(*)()> days { day_one_part_one, day_one_part_two };
+const std::vector<std::string(*)()> days {
+	day_one_part_one, day_one_part_two,
+	day_two_part_one, day_two_part_two,
+};
 
 int main(int argc, char* argv[])
 {

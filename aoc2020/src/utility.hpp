@@ -6,9 +6,9 @@
 #include <vector>
 #include <fstream>
 
-std::vector<int> read_file_lines(const char* filename)
+std::vector<std::string> read_file_lines(const char* filename)
 {
-	std::vector<int> lines;
+	std::vector<std::string> lines;
 	std::string line;
 	std::ifstream file { filename };
 
@@ -20,7 +20,20 @@ std::vector<int> read_file_lines(const char* filename)
 
 	while (std::getline(file, line))
 	{
-		lines.emplace_back(std::stoi(line));
+		lines.emplace_back(line);
+	}
+
+	return lines;
+}
+
+std::vector<int> read_file_lines_int(const char* filename)
+{
+	std::vector<int> lines;
+	std::vector<std::string> linesStr = read_file_lines(filename);
+
+	for (const std::string& string : linesStr)
+	{
+		lines.emplace_back(std::stoi(string));
 	}
 
 	return lines;
