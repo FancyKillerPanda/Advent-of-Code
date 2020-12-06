@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
 			for (int i = 0; i < (int) days.size(); i += 2)
 			{
 					printf("Running day %d:\nResult (part one): %s\nResult (part two): %s\n\n",
-						   i / 2,
+						   (i / 2) + 1,
 						   days[i]().c_str(),
 						   days[i + 1]().c_str());
 			}
@@ -52,8 +52,8 @@ int main(int argc, char* argv[])
 				{
 					printf("Running day %d:\nResult (part one): %s\nResult (part two): %s\n\n",
 						   dayNumber,
-						   days[(dayNumber - 1) / 2]().c_str(),
-						   days[(dayNumber - 1) / 2 + 1]().c_str());
+						   days[(dayNumber - 1) * 2]().c_str(),
+						   days[(dayNumber - 1) * 2 + 1]().c_str());
 				}
 			}
 		}
