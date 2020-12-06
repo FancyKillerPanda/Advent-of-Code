@@ -9,11 +9,13 @@
 #include "day_one.cpp"
 #include "day_two.cpp"
 #include "day_three.cpp"
+#include "day_four.cpp"
 
 const std::vector<std::string(*)()> days {
 	day_one_part_one, day_one_part_two,
 	day_two_part_one, day_two_part_two,
 	day_three_part_one, day_three_part_two,
+	day_four_part_one, day_four_part_two,
 };
 
 int main(int argc, char* argv[])

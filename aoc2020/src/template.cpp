@@ -7,9 +7,11 @@
 std::string day_CHANGE_part_one()
 {
 	std::vector<std::string> lines = read_file_lines("res/day_CHANGE.txt");
+	return "Unknown";
 }
 
 std::string day_CHANGE_part_two()
 {
 	std::vector<std::string> lines = read_file_lines("res/day_CHANGE.txt");
+	return "Unknown";
 }
