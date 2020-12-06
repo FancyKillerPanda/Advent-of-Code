@@ -2,12 +2,13 @@
 
 #include <string>
 #include <vector>
+#include <algorithm>
 #include "utility.hpp"
 
-std::string day_five_part_one()
+std::vector<int> getIds()
 {
 	std::vector<std::string> lines = read_file_lines("res/day_five.txt");
-	int highestId = 0;
+	std::vector<int> idList;
 
 	for (const std::string& line : lines)
 	{
@@ -46,8 +47,18 @@ std::string day_five_part_one()
 		}
 
 		col = min; // Should be same as max
-		int id = row * 8 + col;
+		idList.emplace_back(row * 8 + col);
+	}
 
+	return idList;
+}
+
+std::string day_five_part_one()
+{
+	int highestId = 0;
+	
+	for (int id : getIds())
+	{
 		if (id > highestId)
 		{
 			highestId = id;
@@ -59,6 +70,18 @@ std::string day_five_part_one()
 
 std::string day_five_part_two()
 {
-	std::vector<std::string> lines = read_file_lines("res/day_five.txt");
-	return "Unknown";
+	int ourId = 0;
+	std::vector<int> idList = getIds();
+	std::sort(idList.begin(), idList.end(), [](int first, int second) { return first < second; });
+
+	for (int i = 1; i < (int) idList.size(); i++)
+	{
+		if (idList[i - 1] + 2 == idList[i])
+		{
+			ourId = idList[i - 1] + 1;
+			break;
+		}
+	}
+	
+	return std::to_string(ourId);
 }
